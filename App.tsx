@@ -6,10 +6,9 @@ import { ContadorScreen } from "./src/screens/ContadorScreen";
 
 export const App = () => {
   return (
-    <View>
-      {/* <HolaMundo /> */}
-      <ContadorScreen/>
-    </View>
+    //  <HolaMundo />
+    <ContadorScreen />
+   
   );
 };
 
