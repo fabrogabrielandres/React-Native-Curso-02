@@ -1,25 +1,47 @@
 import React, { useState } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text,  StyleSheet } from 'react-native';
+import { Button } from '../components/Button';
 
 export const ContadorScreen = () => {
     const [contador, setContador] = useState(0)
 
+    const sumaYresta = (n: number): void => {
+        setContador(contador + n)
+    }
+
     return (
-        <View style={{
-            flex: 1,
-            justifyContent: "center"
-        }}>
-            <Text style={{
-                textAlign: "center",
-                fontSize: 40,
-                top: -15,
-            }}>
+        <View style={styles.container}>
+            <Text style={styles.title}>
                 Contador: {contador}
             </Text>
+
             <Button
-                title="holaclick"
-                onPress={() => setContador(contador + 1)}
+            title="+1"
+            onPress={ ()=>sumaYresta(1) }
+            color="white"
             />
-        </View>
+            <Button
+            title="-1"
+            onPress={ ()=>sumaYresta(-1) }
+            color="white"
+            />
+
+        </View >
     );
 };
+
+
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: "center"
+    },
+    title: {
+        fontSize: 40,
+        textAlign: "center",
+        top: -15,
+    }
+})
+
+
