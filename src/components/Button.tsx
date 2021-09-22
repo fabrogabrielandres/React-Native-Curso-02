@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableNativeFeedback, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableNativeFeedback, TouchableOpacity, View, Platform } from 'react-native'
 
 
 interface Props {
@@ -13,21 +13,45 @@ interface Props {
 
 export const Button = ({ title, onPress, position = "left", tinte = "white" }: Props) => {
 
-    return (
-        <View
-            style={[styles.position, (position === "right") ? styles.right : styles.left,]}
-        >
-            <TouchableNativeFeedback
+    const android = () => {
+        return (
+
+            <View
+                style={[styles.position, (position === "right") ? styles.right : styles.left,]}
+            >
+                <TouchableNativeFeedback
+                    onPress={onPress}
+                    background={TouchableNativeFeedback.Ripple("red", false, 30)}
+                >
+                    <View style={styles.button}>
+                        <Text style={[styles.buttonText, (tinte === "green") && styles.green, (tinte === "blue") && styles.blue]}>
+                            {title}
+                        </Text>
+                    </View>
+                </TouchableNativeFeedback>
+            </View>
+        )
+    }
+
+    const ios = () => {
+        return (
+            <TouchableOpacity
+                style={[styles.position, (position === "right") ? styles.right : styles.left,]}
                 onPress={onPress}
-                background={TouchableNativeFeedback.Ripple("red", false,30)}
             >
                 <View style={styles.button}>
                     <Text style={[styles.buttonText, (tinte === "green") && styles.green, (tinte === "blue") && styles.blue]}>
                         {title}
                     </Text>
                 </View>
-            </TouchableNativeFeedback>
-        </View>
+            </TouchableOpacity>
+        )
+    }
+
+
+
+    return (
+        (Platform.OS==="ios") ? ios() : android()
     )
 }
 
