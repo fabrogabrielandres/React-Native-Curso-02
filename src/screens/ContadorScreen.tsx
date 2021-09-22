@@ -18,13 +18,15 @@ export const ContadorScreen = () => {
             <Button
             title="+1"
             onPress={ ()=>sumaYresta(1) }
-            color="white"
+            position="left"
+            tinte="green"
             />
             <Button
             title="-1"
             onPress={ ()=>sumaYresta(-1) }
-            color="white"
-            />
+            position="right"
+            tinte="white"
+           />
 
         </View >
     );

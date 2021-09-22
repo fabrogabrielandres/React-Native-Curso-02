@@ -5,22 +5,23 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 interface Props {
     title?: string;
     onPress: () => void;
-    color?: string;
+    position ?:  "left" | "right" ;
+    tinte?:"blue"|"white"|"green"
 
 }
 
 
-export const Button = ({title,onPress}: Props) => {
+export const Button = ({title,onPress, position="left",tinte="white"}: Props) => {
 
     return (
         <>
             <TouchableOpacity
-                style={styles.buttonPositionRight}
+                style={[styles.position,(position==="right")? styles.right : styles.left,]}
                 onPress={onPress}
 
             >
                 <View style={styles.button}>
-                    <Text style={styles.buttonText}>
+                    <Text style={[styles.buttonText,(tinte==="green")&&styles.green,(tinte==="blue")&&styles.blue]}>
                         {title}
                     </Text>
                 </View>
@@ -34,7 +35,7 @@ export const Button = ({title,onPress}: Props) => {
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: "#5856D6",
+        backgroundColor: "orange",
         borderRadius: 100,
         height: 60,
         width: 60,
@@ -43,20 +44,30 @@ const styles = StyleSheet.create({
 
     buttonText: {
         alignSelf: "center",
-        color: "white",
         fontSize: 20,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        
     },
-    buttonPositionLeft: {
+    position: {
         position: "absolute",
         bottom: 0,
+    },
+    left: {
         left: 0
     },
-    buttonPositionRight: {
-        position: "absolute",
-        bottom: 0,
-        right: 0
+    right: {
+        right:0
+    },
+    white:{
+        color:"white"
+    },
+    blue:{
+        color:"blue"
+    },
+    green:{
+        color:"green"
     }
+
 })
 
 
