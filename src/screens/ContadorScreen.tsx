@@ -37,7 +37,8 @@ export const ContadorScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center"
+        justifyContent: "center",
+        borderRadius:100
     },
     title: {
         fontSize: 40,

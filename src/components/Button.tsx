@@ -1,32 +1,33 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableNativeFeedback, TouchableOpacity, View } from 'react-native'
 
 
 interface Props {
     title?: string;
     onPress: () => void;
-    position ?:  "left" | "right" ;
-    tinte?:"blue"|"white"|"green"
+    position?: "left" | "right";
+    tinte?: "blue" | "white" | "green"
 
 }
 
 
-export const Button = ({title,onPress, position="left",tinte="white"}: Props) => {
+export const Button = ({ title, onPress, position = "left", tinte = "white" }: Props) => {
 
     return (
-        <>
-            <TouchableOpacity
-                style={[styles.position,(position==="right")? styles.right : styles.left,]}
+        <View
+            style={[styles.position, (position === "right") ? styles.right : styles.left,]}
+        >
+            <TouchableNativeFeedback
                 onPress={onPress}
-
+                background={TouchableNativeFeedback.Ripple("red", false,30)}
             >
                 <View style={styles.button}>
-                    <Text style={[styles.buttonText,(tinte==="green")&&styles.green,(tinte==="blue")&&styles.blue]}>
+                    <Text style={[styles.buttonText, (tinte === "green") && styles.green, (tinte === "blue") && styles.blue]}>
                         {title}
                     </Text>
                 </View>
-            </TouchableOpacity>
-        </>
+            </TouchableNativeFeedback>
+        </View>
     )
 }
 
@@ -35,18 +36,26 @@ export const Button = ({title,onPress, position="left",tinte="white"}: Props) =>
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: "orange",
+        backgroundColor: "#5856D6",
         borderRadius: 100,
         height: 60,
         width: 60,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        shadowColor: "#000",
+        textShadowOffset: {
+            width: 0,
+            height: 4
+        },
+        shadowOpacity: 0.30,
+        shadowRadius: 4.65,
+        elevation: 8
     },
 
     buttonText: {
         alignSelf: "center",
         fontSize: 20,
         fontWeight: "bold",
-        
+
     },
     position: {
         position: "absolute",
@@ -56,16 +65,16 @@ const styles = StyleSheet.create({
         left: 0
     },
     right: {
-        right:0
+        right: 0
     },
-    white:{
-        color:"white"
+    white: {
+        color: "white"
     },
-    blue:{
-        color:"blue"
+    blue: {
+        color: "blue"
     },
-    green:{
-        color:"green"
+    green: {
+        color: "green"
     }
 
 })
